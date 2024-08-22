@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "New Employee";
+}
+
+<h1>@ViewData["Title"]</h1>
+<br />
+
+@section styles
+{
+    <link href="~/lib/datatables.net-bs5/datatables.bootstrap5.min.css" rel="stylesheet" />
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <a asp-controller="Employee" asp-action="Index" class="btn btn-success">Return</a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <form id="contactForm" asp-controller="Employee" asp-action="Save" method="post">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    @Html.ValidationSummary()
+                </div>
+            }
+            <div class="mb-3">
+                <label class="form-label" for="Nombre">Name</label>
+                <input class="form-control" id="Nombre" name="Nombre" type="text" placeholder="First Name" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Apellido">Last Name</label>
+                <input class="form-control" id="Apellido" name="Apellido" type="text" placeholder="Last Name" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="NumeroTelefonico">Phone Number</label>
+                <input class="form-control" id="NumeroTelefonico" name="NumeroTelefonico" type="text" placeholder="Telephone" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Dui">DUI</label>
+                <input class="form-control" id="Dui" name="Dui" type="text" placeholder="Document" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="TypeEmployeeId">Employee Type</label>
+                <select id="TypeEmployeeId" class="form-control" name="TypeEmployeeId" required>
+                    @foreach (var typeEmployee in ViewBag.TypeEmployees)
+                    {
+                        <option value="@typeEmployee.Id">@typeEmployee.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="IsActive">Status</label>
+                <select id="IsActive" class="form-control" name="IsActive" required>
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/lib/datatables.net/datatables.js"></script>
+    <script src="~/lib/datatables.net/datatables.min.js"></script>
+    <script src="~/lib/datatables.net-bs5/datatables.bootstrap5.min.js"></script>
+    <script>let table = new DataTable('#Table');</script>
+}

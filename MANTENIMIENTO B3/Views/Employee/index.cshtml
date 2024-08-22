@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Empleados";
+}
+@section styles
+{
+    <link href="~/lib/datatables.net-bs5/datatables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/lib/datatables.net-bs5/datatables.bootstrap5.css" rel="stylesheet" />
+}
+<h1>Empleados</h1>
+
+<div class="row mb-3">
+    <div class="col-md-3">
+        <a asp-controller="Employee" asp-action="Create" class="btn btn-success">Agregar</a>
+    </div>
+</div>
+
+
+<table id="myTable" class="display">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DUI</th>
+            <th>Telefono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Employees)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Apellido</td>
+                <td>@item.Dui</td>
+                <td>@item.NumeroTelefonico</td>
+                <td style="text-align: center;">
+                    <div style="display: flex; justify-content: center; gap: 10px;">
+                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="" class="btn btn-warning">Editar</a>
+                        <a asp-controller="Employee" asp-action="Delete" asp-route-id="" class="btn btn-danger"
+                           data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/lib/datatables.net-bs5/datatables.bootstrap5.min.js"></script>
+    <script src="~/lib/datatables.net-bs5/datatables.bootstrap5.js"></script>
+    <script src="~/lib/datatables.net/datatables.min.js"></script>
+    <script>let table = new DataTable('#myTable');</script>
+}
+
+

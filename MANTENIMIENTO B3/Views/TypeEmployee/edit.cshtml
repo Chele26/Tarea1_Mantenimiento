@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Update Employee";
+    ViewData["Title"] = "Update TypeEmployee";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,15 +10,15 @@
     <link href="~/lib/datatables.net-bs5/datatables.bootstrap5.min.css" rel="stylesheet" />
 }
 
-<div class="container-fluid">
-    <div class="row mb-3">
-        <div class="col-md-3">
-            <a asp-controller="Employee" asp-action="Index" class="btn btn-success">Volver al sitio anterior</a>
-        </div>
-    </div>
+        <div class="container-fluid">
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <a asp-controller="TypeEmployee" asp-action="Index" class="btn btn-success">Volver al sitio anterior</a>
+                </div>
+            </div>
 
     <div class="card-body">
-        <form id="contactForm" asp-controller="Employee" asp-action="Update" method="post">
+        <form id="contactForm" asp-controller="TypeEmployee" asp-action="Update" method="post">
 
             <!--ID del empleado que se actualizará-->
             <input type="hidden" name="Id" value="@Model.Id" />
@@ -32,36 +32,6 @@
             <div class="mb-3">
                 <label class="form-label" for="Nombre">First Name</label>
                 <input class="form-control" id="Nombre" name="Nombre" type="text" value="@Model.Nombre" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="Apellido">Last Name</label>
-                <input class="form-control" id="Apellido" name="Apellido" type="text" value="@Model.Apellido" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="NumeroTelefonico">Phone Number</label>
-                <input class="form-control" id="NumeroTelefonico" name="NumeroTelefonico" type="text" value="@Model.NumeroTelefonico" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="Dui">DUI</label>
-                <input class="form-control" id="Dui" name="Dui" type="text" value="@Model.Dui" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="TypeEmployeeId">Employee Type</label>
-                <select id="TypeEmployeeId" class="form-control" name="TypeEmployeeId" required>
-                    @foreach (var typeEmployee in ViewBag.TypeEmployees)
-                    {
-                        var option = new TagBuilder("option");
-                        option.Attributes["value"] = typeEmployee.Id.ToString();
-
-                        if (typeEmployee.Id == Model.TypeEmployeeId)
-                        {
-                            option.Attributes["selected"] = "selected";
-                        }
-
-                        option.InnerHtml.Append(typeEmployee.Nombre);
-                        @option
-                    }
-                </select>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="IsActive">Status</label>

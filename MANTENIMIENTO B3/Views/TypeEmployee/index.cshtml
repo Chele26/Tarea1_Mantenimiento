@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Empleados";
+    ViewData["Title"] = "Tipo de Empleados";
 }
 
 @section styles
@@ -8,39 +8,35 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet" />
 }
 
-<h1>Empleados</h1>
+<h1>Tipo de Empleado</h1>
 
 <div class="row mb-3">
     <div class="col-md-3">
-        <a asp-controller="Employee" asp-action="Create" class="btn btn-success">Agregar</a>
+        <a asp-controller="TypeEmployee" asp-action="Create" class="btn btn-success">Agregar un nuevo tipo</a>
     </div>
 </div>
 
 <table id="myTable" class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>DUI</th>
-            <th>Telefono</th>
             <th>Tipo</th>
-            <th>Estado</th>
+            <th>FechaCreacion</th>
+            <th>FechaModificacion</th>
+            <th>¿Activo?</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.Employees)
+        @foreach (var item in ViewBag.TypeEmployees)
         {
             <tr>
                 <td>@item.Nombre</td>
-                <td>@item.Apellido</td>
-                <td>@item.Dui</td>
-                <td>@item.NumeroTelefonico</td>
-                <td>@item.TypeEmployee.Nombre</td>
+                <td>@item.FechaCreacion</td>
+                <td>@item.FechaModificacion</td>
                 <td>@item.IsActive</td>
                 <td class="text-center">
                     <div class="btn-group" role="group">
-                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                        <a asp-controller="TypeEmployee" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
                         <button class="btn btn-danger" onclick="confirmDelete(event, @item.Id)">Eliminar</button>
                     </div>
                 </td>
@@ -61,18 +57,18 @@
             event.preventDefault(); // Evita el comportamiento por defecto del botón
 
             Swal.fire({
-                title: '¿Está seguro, de que estas seguro?',
-                text: "¡Una vez eliminado no hay vuelta atras!",
+                title: '¿Uy parce, esta seguro?',
+                text: "¡Paila pa, una vez eliminado no hay vuelta atras !",
                 icon: 'Ojito',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Sísas, eliminar',
+                confirmButtonText: 'Melo mijo, eliminar',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Enviar solicitud POST para eliminar el empleado
-                    fetch('/Employee/DeleteConfirmed', {
+                    fetch('/TypeEmployee/DeleteConfirmed', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
